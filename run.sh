@@ -5,11 +5,14 @@ cd vscode
 git checkout 1.16.1
 
 # Add extension gallery support
+# Borrowed from https://github.com/Microsoft/vscode/issues/23831
 sed -i "s/^}/\t,\"extensionsGallery\": {\n\t\t\"serviceUrl\": \"https:\/\/marketplace.visualstudio.com\/_apis\/public\/gallery\",\n\t\t\"cacheUrl\": \"https:\/\/vscode.blob.core.windows.net\/gallery\/index\",\n\t\t\"itemrl\": \"https:\/\/marketplace.visualstudio.com\/items\"\n\t}\n}/g" product.json
 
+# unsafe-perm flag necessary when installing dependencies as root
+# source: https://github.com/Microsoft/vscode/wiki/How-to-Contribute
 ./scripts/npm.sh install --arch=x64 --unsafe-perm
 
-# Build code-oss
+# Build minified code-oss
 gulp vscode-linux-x64-min
 
 # Build DEB
