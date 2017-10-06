@@ -2,7 +2,7 @@
 
 git clone https://github.com/microsoft/vscode
 cd vscode
-git checkout 1.16.1
+git checkout 1.17.0
 
 # Add extension gallery support
 # Borrowed from https://github.com/Microsoft/vscode/issues/23831
