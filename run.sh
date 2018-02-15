@@ -2,7 +2,7 @@
 
 git clone https://github.com/microsoft/vscode
 cd vscode
-git checkout 1.17.0
+git checkout 1.20.1
 
 # Add extension gallery support
 # Borrowed from https://github.com/Microsoft/vscode/issues/23831
@@ -14,7 +14,7 @@ sed -i "s/^}/\t,\"extensionsGallery\": {\n\t\t\"serviceUrl\": \"https:\/\/market
 ./scripts/npm.sh install --arch=x64 --unsafe-perm
 
 # Build minified code-oss
-gulp vscode-linux-x64-min
+gulp --max_old_space_size=4000 vscode-linux-x64-min
 
 # Build DEB
 gulp vscode-linux-x64-build-deb
