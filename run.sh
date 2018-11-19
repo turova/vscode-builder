@@ -1,8 +1,16 @@
 #!/usr/bin/env bash
 
-git clone https://github.com/microsoft/vscode
+git clone --depth=1 https://github.com/microsoft/vscode
 cd vscode
-git checkout 1.20.1
+
+# Get new tags from remote
+git fetch --tags
+
+# Get latest tag name
+latestTag=$(git describe --tags `git rev-list --tags --max-count=1`)
+
+# Checkout latest tag
+git checkout $latestTag
 
 # Add extension gallery support
 # Borrowed from https://github.com/Microsoft/vscode/issues/23831
@@ -19,6 +27,8 @@ gulp --max_old_space_size=4000 vscode-linux-x64-min
 # Build DEB
 gulp vscode-linux-x64-build-deb
 cp .build/linux/deb/amd64/deb/*.deb /out
+
+echo "VSCode package is ready in out/ directory"
 
 # Build RPM
 #gulp vscode-linux-x64-build-rpm
