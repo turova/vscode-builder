@@ -1,4 +1,4 @@
-FROM ubuntu:18
+FROM ubuntu:16.04
 
 # Install basic packages
 RUN apt-get update && \
